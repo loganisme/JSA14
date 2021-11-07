@@ -12,26 +12,26 @@
 </head>
 <body>
     <section class="form-section">
-        <div class="row">
+        <div class="title">
             <h2>
                 We're happy to hear from you
             </h2>
         </div>
-        <form action="./assets/app.js">
-            <div class="row"><label for="name">Name</label><input type="text"></div>
-            <div class="row"><label for="email">Email</label><input type="text"></div>
-            <div class="row"><label for="quiz">How did you find us?</label><select>
-                <option value="">fiened</option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
+        <form name="form">
+            <div class="row"><div class="label"><label for="name">Name</label></div><input type="text" placeholder="Your name" name="name" required></div>
+            <div class="row"><div class="label"><label for="email">Email</label></div><input type="text" placeholder="Your email" name="email" required></div>
+            <div class="row"><div class="label"><label for="quiz">How did you find us?</label></div><select name="quiz" required>
+                <option >Friend</option>
+                <option >Advertisement</option> 
+                <option >Search engine</option>
+                <option >Other</option>
             </select></div>
-            <div class="row"><label for="newsletter">Newsletter</label><input type="checkbox" value="Yes, please"></div>
-            <div class="row"><label for="message">Drop us a line</label><input type="text"></div>
-            <input type="submit" id="submit" value="Submit">
+            <div class="row"><div class="label"><label for="newsletter">Newsletter</label></div><input type="checkbox" placeholder="newsletter" id="tick_box" name="newsletter" >Yes , please</div>
+            <div class="row"><div class="label"><label for="message">Drop us a line</label></div><input type="text" placeholder="Your message" id="text_box" name="message"></div>
+            <input type="submit" value="Send it" id="submit" onclick="alert_userType()">
 
         </form>
     </section>  
-<link rel="stylesheet" href="./assets/app.js">
+<script src="./assets/app.js"></script>
 </body>
 </html>
