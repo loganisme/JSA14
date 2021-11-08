@@ -1,8 +1,18 @@
-function alert_userType(){
-    var a = document.forms['form']['name'].value;
-    var b = document.forms['form']['email'].value;
-    var c = document.forms['form']['quiz'].value;
-    var d = document.forms['form']['newsletter'].value;
-    var e = document.forms['form']['message'].value;
-    alert(a);
+function validate(){
+    let name = document.forms['form']['name'].value;
+    let email = document.forms['form']['email'].value;
+    let mess = document.forms['form']['message'].value;
+    // alert('tên bạn là :' + name + '\n' + 'email bạn là:' + email)
+    if(email.includes('@gmail.com')){
+        document.writeln('Chào '+name+'<br>')
+        document.writeln('Email của bạn là ' + email+'<br>')
+        if(mess == ""){
+            document.writeln('bạn không muốn nói gì sao?')
+        }
+        else{document.writeln('Your message : ' + mess)}   
+        
+}
+    else{alert('vui lòng nhập đúng email')}
+
+
 }
