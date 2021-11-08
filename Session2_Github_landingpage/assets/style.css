@@ -52,7 +52,7 @@ input , #message{
     height: auto;
     width: auto;
     margin-top: 4px;
-        margin-right: 27px;
+    margin-right: 27px;
 }
 #text_box{
     height: 80px;
@@ -75,6 +75,15 @@ input , #message{
 #message{
     height: 100px;
     font-family: 'Lato';
+}
+select{
+    height: 40px;
+    width: 346px;
+    padding: 7px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    outline: none;
 }
 /* style for header */
 header{
