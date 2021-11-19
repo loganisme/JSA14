@@ -8,6 +8,9 @@ html {
   font-weight: 300;
   color: #555;
 }
+html:focus-within{
+  scroll-behavior: smooth;
+}
 /* style for form */
 .form-section .title h2,
 h2 {
@@ -174,6 +177,9 @@ header {
   background-color: #e67e22;
   color: #fff;
   cursor: pointer;
+}
+a {
+  text-decoration: none;
 }
 /* main_img style */
 .img_sec .main_img img {
