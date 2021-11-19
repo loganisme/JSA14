@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section class="form">
+      <div class="login-form">
+        <form onsubmit="validate(event)" name="form">
+          <div class="title">
+            <h2><span>Admin</span>Dashboard</h2>
+            <h4>Sign in to your account</h4>
+          </div>
+          <div class="user">
+            <input
+              id="email"
+              class="haha"
+              type="email"
+              placeholder="Email"
+              required
+              name="email"
+            /><br />
+            <input
+              id="password"
+              class="haha"
+              type="password"
+              placeholder="Password"
+              name="password"
+            /><br />
+            <div class="box">
+              <input type="checkbox" id="check" name="check" /><label
+                for="check"
+                >Remember me</label
+              >
+              <a href="#">Forger password?</a>
+            </div>
+            <br />
+            <input type="submit" value="Sign in" id="sign-in" />
+            <div class="sign_up">
+              <p>Don't have an account?</p>
+              <a href="#">Signup</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+    <script src="./index.js"></script>
+  </body>
+</html>
