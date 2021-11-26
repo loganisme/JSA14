@@ -51,7 +51,8 @@ function addContact(event) {
   let email = document.forms["form"]["email"].value;
   let add = document.forms["form"]["add"].value;
   let sdt = document.forms["form"]["sdt"].value;
-  phoneList.push({ name, email, add, sdt });
+  if (name && email && add && sdt){
+  phoneList.push({ name, email, add, sdt });}
   console.log(phoneList);
   let renderPhoneList = phoneList.map((value,index) => {
       return `        <tr>
@@ -115,7 +116,7 @@ function changeName (event){
 <td>${value.sdt}</td>
 <td>
   <i class="fas fa-pen" onclick="editName(${index})"></i>
-  <i class="fas fa-trash"></i>
+  <i class="fas fa-trash" onclick="deleteName(${index})"></i>
 </td>
 </tr>`;
   }).join("\n");
@@ -132,7 +133,7 @@ table.innerHTML = `
 </tr>
 </thead>
 ${renderPhoneList}`;
-resetInput()
+resetInput();
 }
 
 function deleteName(key){
@@ -148,7 +149,7 @@ let renderPhoneList = phoneList.map((value,index) => {
 <td>${value.sdt}</td>
 <td>
 <i class="fas fa-pen" onclick="editName(${index})"></i>
-<i class="fas fa-trash"></i>
+<i class="fas fa-trash" onclick="deleteName(${index})"></i>
 </td>
 </tr>`;
 }).join("\n");
@@ -165,7 +166,7 @@ table.innerHTML = `
 </tr>
 </thead>
 ${renderPhoneList}`;
-resetInput()}
+resetInput();}
   
 function deleteAll(){
   window.location.reload()
