@@ -33,14 +33,14 @@ function showForm() {
   addForm = true;
   if (addForm == true) {
     document.getElementById("add-change").innerHTML = `
-    <form id="form">
+    <form id="form" onsubmit="return false">
     <input type="hidden" id="index"/>
     <input type="text" placeholder="name" name="name" id="name" required/>
     <input type="email" placeholder="email" name="email" id="email" required/>
     <input type="text" placeholder="add" required name="add" id="add"/>
     <input type="text" placeholder="sdt" name="sdt"  id="sdt" required/>
-    <input type="submit" class="padding-10" id="save" onclick="addContact(event)" value="thêm"/>
-    <input style="display: none;" type="submit" class="padding-10" id="edit" onclick="changeName(event)" value="sửa" />
+    <input type="button" class="padding-10" id="save" onclick="addContact(event)" value="thêm"/>
+    <input style="display: none;" type="button" class="padding-10" id="edit" onclick="changeName(event)" value="sửa" />
   </form>`;
   }
 }
