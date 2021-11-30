@@ -1,21 +1,7 @@
-var phoneList = [];
 
 let table = document.getElementById("table");
-
-// let renderPhoneList = phoneList.map(value => {  return `        <tr>
-//   <td><input type="checkbox"></td>
-//   <td>${value.name}</td>
-//   <td>${value.email}</td>
-//   <td>${value.add}</td>
-//   <td>${value.sdt}</td>
-//   <td>
-//     <i class="fas fa-pen" onclick="showForm()"></i>
-//     <i class="fas fa-trash"></i>
-//   </td>
-// </tr>`}).join("\n")
-
 table.innerHTML = `
-<thead>
+<thead></thead>
 <tr>
   <th><input type="checkbox"></th>
   <th>Name</th>
@@ -24,8 +10,37 @@ table.innerHTML = `
   <th>Phone</th>
   <th>Action</th>
 </tr>
-</thead>
-`;
+</thead>`
+
+var in4
+if(localStorage.getItem("in4")){
+ in4 =  JSON.parse(localStorage.getItem("in4"))
+let renderPhoneList = in4.map((value,index) => {
+    return `        <tr>
+<td><input type="checkbox"></td>
+<td>${value.name}</td>
+<td>${value.email}</td>
+<td>${value.add}</td>
+<td>${value.sdt}</td>
+<td>
+  <i class="fas fa-pen" onclick="showForm()
+  editName(${index})"></i>
+  <i class="fas fa-trash" onclick="deleteName()"></i>
+</td>
+</tr>`;
+  }).join("\n");
+
+table.innerHTML += `
+${renderPhoneList}`;
+
+}
+else{
+  in4 = []
+}
+
+
+
+
 
 let addForm = false;
 
@@ -51,10 +66,19 @@ function addContact(event) {
   let email = document.forms["form"]["email"].value;
   let add = document.forms["form"]["add"].value;
   let sdt = document.forms["form"]["sdt"].value;
+if(localStorage.getItem("in4")){
+   in4 =  JSON.parse(localStorage.getItem("in4"))
+  }
+   else{
+     in4 = []
+   }
+
   if (name && email && add && sdt){
-  phoneList.push({ name, email, add, sdt });}
-  console.log(phoneList);
-  let renderPhoneList = phoneList.map((value,index) => {
+  in4.push({ name, email, add, sdt });
+  
+  localStorage.setItem("in4" , JSON.stringify(in4))}
+ 
+  let renderPhoneList = in4.map((value,index) => {
       return `        <tr>
   <td><input type="checkbox"></td>
   <td>${value.name}</td>
@@ -62,8 +86,9 @@ function addContact(event) {
   <td>${value.add}</td>
   <td>${value.sdt}</td>
   <td>
-    <i class="fas fa-pen" onclick="editName(${index})"></i>
-    <i class="fas fa-trash" onclick="deleteName(${index})"></i>
+  <i class="fas fa-pen" onclick="showForm()
+  editName(${index})"></i>
+    <i class="fas fa-trash" onclick="deleteName()"></i>
   </td>
   </tr>`;
     }).join("\n");
@@ -91,23 +116,36 @@ function resetInput() {
 }
 
 function editName(key){
-  document.getElementById("index").value = key
-  document.getElementById("name").value = phoneList[key].name
-  document.getElementById("email").value = phoneList[key].email
-  document.getElementById("add").value = phoneList[key].add
-  document.getElementById("sdt").value = phoneList[key].sdt
+  console.log(key);
+  if(localStorage.getItem("in4")){
+    in4 =  JSON.parse(localStorage.getItem("in4"))
+   }
+    else{
+      in4 = []
+    }
   document.getElementById("save").style.display = "none"
   document.getElementById("edit").style.display = "inline-block"
+  document.getElementById("index").value = key
+  document.getElementById("name").value = in4[key].name
+  document.getElementById("add").value = in4[key].add
+  document.getElementById("email").value = in4[key].email
+  document.getElementById("sdt").value = in4[key].sdt
 }
 
 function changeName (event){
   event.preventDefault()
+  if(localStorage.getItem("in4")){
+    in4 =  JSON.parse(localStorage.getItem("in4"))
+   }
+    else{
+      in4 = []
+    }
   let index = document.getElementById("index").value
-  phoneList[index].name = document.getElementById("name").value
-  phoneList[index].email = document.getElementById("email").value
-  phoneList[index].sdt = document.getElementById("sdt").value
-  phoneList[index].add = document.getElementById("add").value
-  let renderPhoneList = phoneList.map((value,index) => {
+  in4[index].name = document.getElementById("name").value
+  in4[index].email = document.getElementById("email").value
+  in4[index].sdt = document.getElementById("sdt").value
+  in4[index].add = document.getElementById("add").value
+  let renderPhoneList = in4.map((value,index) => {
     return `        <tr>
 <td><input type="checkbox"></td>
 <td>${value.name}</td>
@@ -115,8 +153,9 @@ function changeName (event){
 <td>${value.add}</td>
 <td>${value.sdt}</td>
 <td>
-  <i class="fas fa-pen" onclick="editName(${index})"></i>
-  <i class="fas fa-trash" onclick="deleteName(${index})"></i>
+  <i class="fas fa-pen" onclick="showForm()
+  editName(${index})"></i>
+  <i class="fas fa-trash" onclick="deleteName()"></i>
 </td>
 </tr>`;
   }).join("\n");
@@ -134,13 +173,24 @@ table.innerHTML = `
 </thead>
 ${renderPhoneList}`;
 resetInput();
+document.getElementById("save").style.display = "inline-block"
+document.getElementById("edit").style.display = "none"
 }
 
 function deleteName(key){
+  if(localStorage.getItem("in4")){
+    in4 =  JSON.parse(localStorage.getItem("in4"))
+   }
+    else{
+      in4 = []
+    }
+  let i
   if(confirm("are u sure?")){
-    phoneList.splice(key , 1)
+    in4.splice(key , 1)
+  localStorage.setItem("in4" , JSON.stringify(in4))
+
 }
-let renderPhoneList = phoneList.map((value,index) => {
+let renderPhoneList = in4.map((value,index) => {
   return `        <tr>
 <td><input type="checkbox"></td>
 <td>${value.name}</td>
@@ -149,7 +199,7 @@ let renderPhoneList = phoneList.map((value,index) => {
 <td>${value.sdt}</td>
 <td>
 <i class="fas fa-pen" onclick="editName(${index})"></i>
-<i class="fas fa-trash" onclick="deleteName(${index})"></i>
+<i class="fas fa-trash" onclick="deleteName()"></i>
 </td>
 </tr>`;
 }).join("\n");
@@ -166,8 +216,26 @@ table.innerHTML = `
 </tr>
 </thead>
 ${renderPhoneList}`;
-resetInput();}
+ }
   
 function deleteAll(){
-  window.location.reload()
+  if(localStorage.getItem("in4")){
+    in4 =  JSON.parse(localStorage.getItem("in4"))
+   }
+    else{
+      in4 = []
+    }
+  localStorage.clear();
+  console.log(in4);
+  table.innerHTML = `
+<thead></thead>
+<tr>
+  <th><input type="checkbox"></th>
+  <th>Name</th>
+  <th>Email</th>
+  <th>Address</th>
+  <th>Phone</th>
+  <th>Action</th>
+</tr>
+</thead>`
 }
