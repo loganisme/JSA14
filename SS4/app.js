@@ -25,7 +25,7 @@ if (localStorage.getItem("in4")) {
 <td>
   <i class="fas fa-pen" onclick="showForm()
   editName(${index})"></i>
-  <i class="fas fa-trash" onclick="deleteName()"></i>
+  <i class="fas fa-trash" onclick="deleteName(${index})"></i>
 </td>
 </tr>`;
     })
@@ -84,7 +84,7 @@ function addContact(event) {
   <td>
   <i class="fas fa-pen" onclick="showForm()
   editName(${index})"></i>
-    <i class="fas fa-trash" onclick="deleteName()"></i>
+    <i class="fas fa-trash" onclick="deleteName(${index})"></i>
   </td>
   </tr>`;
     })
@@ -151,7 +151,7 @@ function changeName(event) {
 <td>
   <i class="fas fa-pen" onclick="showForm()
   editName(${index})"></i>
-  <i class="fas fa-trash" onclick="deleteName()"></i>
+  <i class="fas fa-trash" onclick="deleteName(${index})"></i>
 </td>
 </tr>`;
     })
@@ -196,7 +196,7 @@ function deleteName(key) {
 <td>${value.sdt}</td>
 <td>
 <i class="fas fa-pen" onclick="editName(${index})"></i>
-<i class="fas fa-trash" onclick="deleteName()"></i>
+<i class="fas fa-trash" onclick="deleteName(${index})"></i>
 </td>
 </tr>`;
     })
