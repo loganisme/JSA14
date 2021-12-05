@@ -16,6 +16,7 @@ if (localStorage.getItem("in4")) {
   in4 = JSON.parse(localStorage.getItem("in4"));
   let renderPhoneList = in4
     .map((value, index) => {
+      console.log(value);
       return `        <tr>
 <td><input type="checkbox"></td>
 <td>${value.name}</td>
@@ -25,7 +26,7 @@ if (localStorage.getItem("in4")) {
 <td>
   <i class="fas fa-pen" onclick="showForm()
   editName(${index})"></i>
-  <i class="fas fa-trash" onclick="deleteName()"></i>
+  <i class="fas fa-trash" onclick="deleteName(${index})"></i>
 </td>
 </tr>`;
     })
@@ -84,7 +85,7 @@ function addContact(event) {
   <td>
   <i class="fas fa-pen" onclick="showForm()
   editName(${index})"></i>
-    <i class="fas fa-trash" onclick="deleteName()"></i>
+    <i class="fas fa-trash" onclick="deleteName(${index})"></i>
   </td>
   </tr>`;
     })
@@ -151,7 +152,7 @@ function changeName(event) {
 <td>
   <i class="fas fa-pen" onclick="showForm()
   editName(${index})"></i>
-  <i class="fas fa-trash" onclick="deleteName()"></i>
+  <i class="fas fa-trash" onclick="deleteName(${index})"></i>
 </td>
 </tr>`;
     })
@@ -176,15 +177,18 @@ ${renderPhoneList}`;
 }
 
 function deleteName(key) {
+  console.log(in4);
   if (localStorage.getItem("in4")) {
     in4 = JSON.parse(localStorage.getItem("in4"));
+
   } else {
     in4 = [];
   }
   let i;
   if (confirm("are u sure?")) {
-    in4.splice(key, 1);
+    in4.splice(key, key+1);
     localStorage.setItem("in4", JSON.stringify(in4));
+    console.log(in4);
   }
   let renderPhoneList = in4
     .map((value, index) => {
@@ -196,7 +200,7 @@ function deleteName(key) {
 <td>${value.sdt}</td>
 <td>
 <i class="fas fa-pen" onclick="editName(${index})"></i>
-<i class="fas fa-trash" onclick="deleteName()"></i>
+<i class="fas fa-trash" onclick="deleteName(${index})"></i>
 </td>
 </tr>`;
     })
