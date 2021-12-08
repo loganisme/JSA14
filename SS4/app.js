@@ -134,7 +134,7 @@ function changeName(event) {
     in4 = JSON.parse(localStorage.getItem("in4"));
   } else {
     in4 = [];
-  }
+  }                       
   let index = document.getElementById("index").value;
   in4[index].name = document.getElementById("name").value;
   in4[index].email = document.getElementById("email").value;
