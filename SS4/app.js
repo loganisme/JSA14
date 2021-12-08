@@ -16,6 +16,7 @@ if (localStorage.getItem("in4")) {
   in4 = JSON.parse(localStorage.getItem("in4"));
   let renderPhoneList = in4
     .map((value, index) => {
+      console.log(value);
       return `        <tr>
 <td><input type="checkbox"></td>
 <td>${value.name}</td>
@@ -57,25 +58,28 @@ function showForm() {
 
 function addContact(event) {
   event.preventDefault();
+  const phoneNumRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
+  const emailRegex =/^([a-z0-9])+(@gmail\.com)$/gm
   let name = document.forms["form"]["name"].value;
   let email = document.forms["form"]["email"].value;
   let add = document.forms["form"]["add"].value;
   let sdt = document.forms["form"]["sdt"].value;
-  if (localStorage.getItem("in4")) {
-    in4 = JSON.parse(localStorage.getItem("in4"));
-  } else {
-    in4 = [];
-  }
+  if (phoneNumRegex.test(sdt)&& emailRegex.test(email)) {
+    if (localStorage.getItem("in4")) {
+      in4 = JSON.parse(localStorage.getItem("in4"));
+    } else {
+      in4 = [];
+    }
 
-  if (name && email && add && sdt) {
-    in4.push({ name, email, add, sdt });
+    if (name && email && add && sdt) {
+      in4.push({ name, email, add, sdt });
 
-    localStorage.setItem("in4", JSON.stringify(in4));
-  }
+      localStorage.setItem("in4", JSON.stringify(in4));
+    }
 
-  let renderPhoneList = in4
-    .map((value, index) => {
-      return `        <tr>
+    let renderPhoneList = in4
+      .map((value, index) => {
+        return `        <tr>
   <td><input type="checkbox"></td>
   <td>${value.name}</td>
   <td>${value.email}</td>
@@ -87,10 +91,10 @@ function addContact(event) {
     <i class="fas fa-trash" onclick="deleteName(${index})"></i>
   </td>
   </tr>`;
-    })
-    .join("\n");
+      })
+      .join("\n");
 
-  table.innerHTML = `
+    table.innerHTML = `
   <thead></thead>
   <tr>
     <th><input type="checkbox"></th>
@@ -102,7 +106,10 @@ function addContact(event) {
   </tr>
   </thead>
   ${renderPhoneList}`;
-  resetInput();
+    resetInput();
+  } else {
+    alert("cant find your number or email");
+  }
 }
 
 function resetInput() {
@@ -130,19 +137,24 @@ function editName(key) {
 
 function changeName(event) {
   event.preventDefault();
+  const phoneNumRegex = /(84|0[3|5|7|8|9])([0-9]{8})\b/g;
+  const emailRegex =/^([a-z0-9])+(@gmail\.com)$/gm
   if (localStorage.getItem("in4")) {
     in4 = JSON.parse(localStorage.getItem("in4"));
   } else {
     in4 = [];
-  }
+  }                       
   let index = document.getElementById("index").value;
   in4[index].name = document.getElementById("name").value;
   in4[index].email = document.getElementById("email").value;
   in4[index].sdt = document.getElementById("sdt").value;
   in4[index].add = document.getElementById("add").value;
-  let renderPhoneList = in4
-    .map((value, index) => {
-      return `        <tr>
+  if (
+    phoneNumRegex.test((in4[index].sdt = document.getElementById("sdt").value)) && emailRegex.test(in4[index].email = document.getElementById("email").value)
+  ) {
+    let renderPhoneList = in4
+      .map((value, index) => {
+        return `        <tr>
 <td><input type="checkbox"></td>
 <td>${value.name}</td>
 <td>${value.email}</td>
@@ -154,10 +166,10 @@ function changeName(event) {
   <i class="fas fa-trash" onclick="deleteName(${index})"></i>
 </td>
 </tr>`;
-    })
-    .join("\n");
+      })
+      .join("\n");
 
-  table.innerHTML = `
+    table.innerHTML = `
 <thead></thead>
 <tr>
   <th><input type="checkbox"></th>
@@ -169,13 +181,17 @@ function changeName(event) {
 </tr>
 </thead>
 ${renderPhoneList}`;
-  resetInput();
-  document.getElementById("save").style.display = "inline-block";
-  document.getElementById("edit").style.display = "none";
-  localStorage.setItem("in4", JSON.stringify(in4));
+    resetInput();
+    document.getElementById("save").style.display = "inline-block";
+    document.getElementById("edit").style.display = "none";
+    localStorage.setItem("in4", JSON.stringify(in4));
+  } else {
+    alert("cant find your number or email");
+  }
 }
 
 function deleteName(key) {
+  console.log(in4);
   if (localStorage.getItem("in4")) {
     in4 = JSON.parse(localStorage.getItem("in4"));
   } else {
@@ -185,6 +201,7 @@ function deleteName(key) {
   if (confirm("are u sure?")) {
     in4.splice(key, 1);
     localStorage.setItem("in4", JSON.stringify(in4));
+    console.log(in4);
   }
   let renderPhoneList = in4
     .map((value, index) => {
